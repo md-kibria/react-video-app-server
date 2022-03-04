@@ -1,0 +1,117 @@
+- let link = `${protocol}://${host}:${port}/api`
+mixin link(title, path, method = 'get', isProtected = true)
+
+     li 
+        span #{title} (Method: 
+            span.met #{String(method).toUpperCase()}
+            | )
+        p #{link + path + ' '}
+            if (isProtected) 
+                span.pro (protected) 
+            else 
+                span.pub (public)
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="shortcut icon", href="./assets/favicon.png", type="image/x-icon")
+        style.
+            body {
+                background-color: black;
+                color: white;
+                font-family: sans-serif;
+                padding: 20px;
+            }
+
+            header {
+                margin-top: 20px;
+            }
+
+            h1 {
+                text-align: center;
+                font-weight: 300;
+                margin: 25px 0;
+            }
+
+            main {
+                //- display: grid;
+                //- grid-template-columns: 1fr 1fr 1fr;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            div {
+                margin: 10px;
+                flex-grow: 1;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            h3 {
+                padding-left: 10px;
+            }
+
+            span {
+                color: #888;
+            }
+
+            .pro {
+                color: #bc1ca0;
+            }
+
+            .pub {
+                color: green;
+            }
+
+            .met {
+                color: #6795fce6;
+            }
+
+            p {
+                color: #ccc;
+                letter-spacing: 0.2px;
+                margin-top: 5px;
+            }
+    body
+        header
+            h1= title
+            hr/
+
+        main
+            div
+                h3 Users
+                hr/
+                ul 
+                    +link('Get All Users', '/user/','get', false)
+                    +link('Get Single User', '/user/:id', 'get', false)
+                    +link('SignUp User', '/user/signup', 'post',false)
+                    +link('Login Users', '/user/login', 'post', false)
+                    +link('Update User', '/user/update/:id', 'put')
+                    +link('Delete User', '/user/delete/:id', 'delete')
+                    +link('Add Video To Favourite List', '/user/addfav/:id', 'put')
+
+            div 
+                h3 Videos 
+                hr/
+                ul 
+                    +link('Get All Videos', '/video/', 'get', false)
+                    +link('Get Single Video', '/video/:id', 'get', false)
+                    +link('Search Video', '/video/search?q=<query>', 'get', false)
+                    +link('Add Video', '/video/upload', 'post')
+                    +link('Update Video', '/video/update/:id', 'put')
+                    +link('Delete Video', '/video/delete/:id', 'delete')
+
+            div 
+                h3 Comment 
+                hr/
+                ul 
+                    +link('Get comment', '/comment/:video', 'get', false)
+                    +link('Add comment', '/comment/create/:video', 'post')
+                    +link('Delete comment', '/comment/delete/:id', 'delete')
