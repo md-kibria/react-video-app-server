@@ -81,7 +81,8 @@ app.use((err, req, res, next) => {
 
 // connect database
 mongoose.connect(
-    'mongodb://localhost:27017/video-app',
+    // 'mongodb://localhost:27017/video-app',
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fgyzv.mongodb.net/video-app`,
     {
         useUnifiedTopology: true,
         useNewUrlParser: true
