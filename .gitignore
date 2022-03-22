@@ -1,5 +1,5 @@
 /.env
 /node_modules
-/requirements.txt
+/requirements_file.txt
 /public/uploads
 **/uploads
