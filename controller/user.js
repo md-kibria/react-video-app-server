@@ -9,7 +9,7 @@ const fs = require('fs')
 const signupUser = async (req, res, next) => {
     // destracturing from req body
     const { name, email, password } = req.body
-    const { filename } = req.file
+    // const { filename } = req.file
 
     // hash password
     const hash = await bcrypt.hash(password, 11)
